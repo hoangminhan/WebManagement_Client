@@ -1,0 +1,87 @@
+#admin-filter {
+  margin-top: 32px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.363);
+  button {
+    padding: 4px 20px;
+    background: none;
+    transform: translateY(1px);
+    background: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.363);
+  }
+
+  button.active {
+    border: 1px solid rgba(0, 0, 0, 0.363);
+    border-bottom: 1px solid rgb(255, 255, 255);
+  }
+}
+
+#coin {
+  margin-top: 32px;
+  form {
+    margin: 0 auto;
+    width: 98%;
+    max-width: 375px;
+    input {
+      padding: 4px 12px;
+      border: 1px solid black;
+      width: 100%;
+    }
+  }
+
+  .user-info {
+    .title {
+      font-weight: 100;
+      font-size: 1.2rem;
+      color: rgb(255, 94, 20);
+    }
+    margin: 32px auto;
+    width: 98%;
+    max-width: 375px;
+
+    .trade {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgb(233, 219, 219);
+      .abc {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        input {
+          width: auto;
+          flex-grow: 1;
+          margin-left: 12px;
+        }
+      }
+      button {
+        margin-left: auto;
+        width: 100%;
+        padding: 6px 0;
+        margin-top: 20px;
+      }
+      button:hover {
+        background-color:rgb(255, 94, 20);
+        color: white;
+        transition: ease .2s;
+      }
+    }
+  }
+}
+
+#admin-request {
+  ul {
+    margin: 0;
+    padding: 0;
+    margin-top: 32px;
+    li {
+      list-style: none;
+      padding: 16px 12px;
+      border-bottom: 1px solid black;
+      position: relative; 
+      button {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+  }
+}

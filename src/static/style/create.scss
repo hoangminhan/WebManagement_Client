@@ -1,0 +1,86 @@
+// .create-product {
+//   background: rgba(187, 180, 180, 0.411);
+//   h1 {
+//     position: relative;
+//     text-align: center;
+//     color: white;
+//     padding: 16px;
+
+//     i {
+//       position: absolute;
+//       left: 24px;
+//       font-size: 2rem;
+//     }
+//   }
+//   .create-container {
+//     padding: 32px 0px;
+//     form {
+//       .create-name,
+//       .create-category,
+//       .create-price,
+//       .create-desc {
+//         display: flex;
+//         width: 100%;
+//         justify-content: space-between;
+//         margin-bottom: 20px;
+//         position: relative;
+//       }
+//       label {
+//         flex-shrink: 0;
+//         margin-right: 20px;
+//         font-weight: bolder;
+//       }
+//       input {
+//         width: 100%;
+//         border: 1px solid rgba(63, 56, 56, 0.616);
+//         padding: 4px 12px;
+//       }
+//       select {
+//         position: absolute;
+//         right: 0;
+//         width: 200px;
+//         padding: 4px 12px;
+//         margin-left: auto;
+//       }
+//       .form-btn {
+//         button {
+//           display: inline-block;
+//           width: 100%;
+//           padding: 6px 0px;
+//           margin-top: 12px;
+//           background: rgb(228, 108, 39);
+//           color: white;
+//           margin-bottom: 32px;
+//         }
+//         button:hover {
+//           background: rgb(107, 52, 20);
+//         }
+//       }
+//     }
+
+//     .file-upload {
+//       .image-container {
+//         position: relative;
+//         width: 100%;
+//         img {
+//           width: 100%;
+//           aspect-ratio: 2;
+//           object-fit: cover;
+//         }
+
+//         label {
+//           position: absolute;
+//           bottom: 0;
+//           width: 100%;
+//           padding: 12px;
+//           left: 0;
+//           background: rgba(102, 99, 99, 0.644);
+//           text-align: center;
+//           font-size: 1.6rem;
+//           cursor: pointer;
+//           margin: 0;
+//         }
+//       }
+//     }
+//   }
+// }
