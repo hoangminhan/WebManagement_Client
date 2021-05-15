@@ -208,11 +208,9 @@ export const removeGuestAsync = (_id) => {
       .then((res) => {
         if (res.data && res.data.status) {
           dispatch(removeGuest(_id));
+          alert('Xóa thành công!')
         } else {
-          triggerNotif({
-            type: "ERROR",
-            content: res.data.message,
-          });
+          alert('Lỗi xóa: ' + res.data.message)
         }
       })
       .catch((err) => {
@@ -291,11 +289,9 @@ export const removeProductAsync = (_id) => {
       .then((res) => {
         if (res.data && res.data.status) {
           dispatch(removeProduct(_id));
+          alert('Xóa thành công!')
         } else {
-          triggerNotif({
-            type: "ERROR",
-            content: res.data.message,
-          });
+          alert('Lỗi xóa: ' + res.data.message)
         }
       })
       .catch((err) => {

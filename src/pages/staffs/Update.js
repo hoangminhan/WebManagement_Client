@@ -1,23 +1,32 @@
 import { useState, useRef, useEffect } from 'react'
-import { useHistory, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateGuest, updateUser } from '../../services/global'
+import { updateUser } from '../../services/global'
 import { toggleLoading } from '../../redux/actions'
 import toChar from '../../utils/toChar'
+import { emailValidate, nameValidate, usernameValidate, phoneValidate } from '../../utils/validate'
 
 const Update = ({ updateForm, setUpdateForm }) => {
-  const history = useHistory()
   const { info } = updateForm
 
-  const login = useSelector(state => state.global.login)
   const users = useSelector(state => state.global.users)
   const dispatch = useDispatch()
 
   const [file, setFile] = useState(null)
   const [data, getData] = useState({ name: '', path: '/images/user_default_img.png' })
 
+
+  const [emailErr, logEmailErr] = useState(false)
+  const [usernameErr, logUsernameErr] = useState(false)
+  const [fullNameErr, logFullNameErr] = useState(false)
+  const [phoneNumberErr, logPhoneNumberErr] = useState(false)
+
+  const [passErr, logPassErr] = useState(false)
+
+  const [userData, setUserData] = useState({})
+
   const nameEl = useRef(null)
   const imageEl = useRef(null)
+  const mailEl = useRef(null)
   const phoneEl = useRef(null)
   const addEl = useRef(null)
   const usernameEl = useRef(null)
@@ -28,6 +37,92 @@ const Update = ({ updateForm, setUpdateForm }) => {
       path: info.image && info.image.url
     })
   }, [info])
+
+  const emailValidation = (e) => {
+    let value = e.target.value || ''
+    value = value.trim()
+    setUserData({
+      ...userData,
+      email: value
+    })
+
+    if (value !== '') {
+      logEmailErr(!emailValidate(value))
+    } else {
+      logEmailErr(false)
+    }
+  }
+
+  const phoneNumberValidate = (e) => {
+    let value = e.target.value || ''
+    value = value.trim()
+    setUserData({
+      ...userData,
+      phone: value
+    })
+
+    if (value !== '') {
+      logPhoneNumberErr(!phoneValidate(value))
+    } else {
+      logPhoneNumberErr(false)
+    }
+  }
+
+  const usernameValidation = (e) => {
+    let value = e.target.value || ''
+    value = value.trim()
+    setUserData({
+      ...userData,
+      username: value
+    })
+
+    if (value !== '') {
+      logUsernameErr(!usernameValidate(value))
+    } else {
+      logUsernameErr(false)
+    }
+  }
+
+  const fullNameValidation = (e) => {
+    let value = e.target.value || ''
+    value = value.trim()
+    setUserData({
+      ...userData,
+      fullName: value
+    })
+
+    if (value !== '') {
+      logFullNameErr(!nameValidate(value))
+    } else {
+      logFullNameErr(false)
+    }
+  }
+
+  const passValidation = (e) => {
+    let value = e.target.value || ''
+    value = value.trim()
+    setUserData({
+      ...userData,
+      password: value
+    })
+
+    if (value !== '') {
+      if (value.length < 6) {
+        logPassErr(true)
+      } else {
+        logPassErr(false)
+      }
+
+    } else {
+      logPassErr(false)
+    }
+  }
+
+  const checkValidate = () => {
+    if (!emailErr && !usernameErr && !fullNameErr && !passErr) {
+      return true
+    } else return false
+  }
 
   const handleChange = (e) => {
     const selectedFile = e.target.files[0]
@@ -46,25 +141,27 @@ const Update = ({ updateForm, setUpdateForm }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (!checkValidate()) return alert('Vui lòng điền thông tin hợp lệ!')
 
     const fullName = nameEl.current.value.trim()
     // const id = idEl.current.value.trim()
     const phone = phoneEl.current.value.trim()
     const address = addEl.current.value.trim()
+    const email = mailEl.current.value.trim()
     const username = usernameEl.current.value.trim()
     const password = passwordEl.current.value.trim()
     const text = toChar(fullName)
 
     let checkUsername = false
     users.forEach(item => {
-      if (item.username == username && item.username !== info.username ) {
+      if (item.username == username && item.username !== info.username) {
         checkUsername = true
       }
     })
 
     if (checkUsername) return alert('Username đã tồn tại!')
     const data = {
-      fullName, text, phone, address, username, password, image: info.image
+      fullName, text, email, phone, address, username, password, image: info.image
     }
 
     if (file) {
@@ -131,15 +228,15 @@ const Update = ({ updateForm, setUpdateForm }) => {
                 </div>
                 <div className='create-name'>
                   <label htmlFor='create_name'>Họ Tên: </label>
-                  <input defaultValue={info.fullName} required ref={nameEl} id='create_name' />
+                  <input defaultValue={info.fullName} onChange={fullNameValidation} required className={fullNameErr ? 'error' : ''} ref={nameEl} id='create_name' />
                 </div>
-                {/* <div className='create-id'>
-                  <label htmlFor='create_id'>CMND: </label>
-                  <input defaultValue={info.cmnd} required ref={idEl} id='create_id' />
-                </div> */}
                 <div className='create-phone'>
                   <label htmlFor='create_phone'>SĐT: </label>
-                  <input defaultValue={info.phone} required ref={phoneEl} id='create_phone' />
+                  <input defaultValue={info.phone} onChange={phoneNumberValidate} className={phoneNumberErr ? 'error' : ''} required ref={phoneEl} id='create_phone' />
+                </div>
+                <div className='create-mail'>
+                  <label htmlFor='create_mail'>email: </label>
+                  <input defaultValue={info.email} onChange={(e) => emailValidation(e)} className={emailErr ? 'error' : ''} required ref={mailEl} id='create_mail' />
                 </div>
                 <div className='create-add'>
                   <label htmlFor='create_add'>Địa chỉ: </label>
@@ -147,11 +244,11 @@ const Update = ({ updateForm, setUpdateForm }) => {
                 </div>
                 <div className='create-username'>
                   <label htmlFor='create_username'>Tài khoản: </label>
-                  <input defaultValue={info.username} required ref={usernameEl} id='create_username' />
+                  <input defaultValue={info.username} onChange={(e) => usernameValidation(e)} className={usernameErr ? 'validate-error' : ''} required ref={usernameEl} id='create_username' />
                 </div>
                 <div className='create-password'>
                   <label htmlFor='create_password'>Mật khẩu: </label>
-                  <input defaultValue={info.password} required ref={passwordEl} id='create_password' />
+                  <input defaultValue={info.password} onChange={passValidation} className={passErr ? 'error' : ''} required ref={passwordEl} id='create_password' />
                 </div>
                 <button type='submit'>Submit</button>
               </div>

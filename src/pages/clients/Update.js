@@ -95,11 +95,11 @@ const Update = ({ updateForm, setUpdateForm }) => {
               </div>
               <div className='create-id'>
                 <label htmlFor='create_id'>CMND: </label>
-                <input defaultValue={info.cmnd} required ref={idEl} id='create_id' />
+                <input defaultValue={info.cmnd} type='number' required ref={idEl} id='create_id' />
               </div>
               <div className='create-phone'>
                 <label htmlFor='create_phone'>SĐT: </label>
-                <input defaultValue={info.phone} required ref={phoneEl} id='create_phone' />
+                <input defaultValue={info.phone} type='number' required ref={phoneEl} id='create_phone' />
               </div>
               <div className='create-address'>
                 <select required defaultValue={info.address && JSON.stringify(info.address) || "Quận/Huyện"} ref={addEl} name="categories">

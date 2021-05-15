@@ -82,7 +82,7 @@ const Create = ({ status, setCreateForm }) => {
               </div>
               <div className='create-id'>
                 <label htmlFor='create_id'>CMND: </label>
-                <input required ref={idEl} id='create_id' />
+                <input type='number' required ref={idEl} id='create_id' />
               </div>
               <div className='create-phone'>
                 <label htmlFor='create_phone'>SĐT: </label>

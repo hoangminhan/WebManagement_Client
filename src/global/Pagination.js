@@ -20,7 +20,15 @@ const Pagination = ({ totalPage, currentPage, changePage }) => {
           }
           {
             pageArr.map((item, index) =>
-              <li onClick={() => changePage(index + 1)} className={index + 1 === currentPage && "page-item current" || "page-item"} > <a className="page-link">{index + 1}</a></li>
+            {
+              if (index >= currentPage - 3 && index < currentPage + 2) {
+                return (
+                  <li onClick={() => changePage(index + 1)} className={index + 1 === currentPage && "page-item current" || "page-item"} > <a className="page-link">{index + 1}</a></li>
+                )
+              } else {
+                return null
+              }                       
+            }
             )
           }
           {
