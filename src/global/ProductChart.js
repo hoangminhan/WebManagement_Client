@@ -23,8 +23,8 @@ const ProductChart = () => {
   })
 
   useEffect(() => {
-    dispatch(getAllProductsAsync({}))
-  }, [])
+    dispatch(getAllProductsAsync({page: -1}))
+  }, [dispatch])
 
   useEffect(() => {
     setOptions(

@@ -37,7 +37,7 @@ const AddressChart = () => {
   })
 
   useEffect(() => {
-    dispatch(getAllGuestsAsync({}))
+    dispatch(getAllGuestsAsync({page: -1}))
   }, [])
 
   useEffect(() => {

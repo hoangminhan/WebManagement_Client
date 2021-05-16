@@ -29,13 +29,7 @@ function App() {
   })
 
   useEffect(() => {
-    dispatch(getAllProductsAsync({}))
     dispatch(getAllCategoriesAsync())
-    dispatch(getAllProductsAsync({}))
-  }, [dispatch])
-
-  useEffect(() => {
-    dispatch(getAllGuestsAsync({}), true)
   }, [dispatch])
 
   useEffect(() => {

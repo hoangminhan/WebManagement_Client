@@ -4,7 +4,7 @@ import ProductChart from "../../global/ProductChart";
 import PieChart1 from "../../global/PieChart1";
 import AddressChart from "../../global/AddressChart";
 import formatNumber from "../../utils/formatNum";
-import { getAllGuestsAsync } from "../../redux/actions";
+import { getAllGuestsAsync, getAllProductsAsync } from "../../redux/actions";
 
 const Overall = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,11 @@ const Overall = () => {
   let avg = Math.floor(total / ((totalGuests > 0 && totalGuests) || 1));
 
   useEffect(() => {
-    dispatch(getAllGuestsAsync({}));
+    dispatch(getAllProductsAsync({page: -1}));
+  }, []);
+
+  useEffect(() => {
+    dispatch(getAllGuestsAsync({page: -1}));
     dispatch({
       type: "SET_TITLE",
       payload: "Tổng quan",
@@ -31,11 +35,7 @@ const Overall = () => {
       <div className="overall-tab-container">
         <div className="pie-chart-container">
           <h5>Loại khách hàng (Tổng số KH: {totalGuests})</h5>
-          <PieChart1 />
-          <span style={{ background: "#E38627" }}>Đ.Biệt</span>
-          <span style={{ background: "#C13C37" }}>VIP</span>
-          <span style={{ background: "#6A2135" }}>T.Năng</span>
-          <span style={{ background: "#6A2457" }}>V.Lai</span>
+          <PieChart1 totalGuests={totalGuests || 1} />
         </div>
         <div className="pie-chart-container">
           <h5>Chi tiêu trung bình:</h5>

@@ -18,6 +18,9 @@ const Product = ({ product, setProduct }) => {
   const products = useSelector((state) => state.global.products);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getAllProductsAsync({page: -1}))
+  }, [])
   const buyProduct = (data) => {
     const { user } = product;
     const totalMoney = (user.totalMoney =
