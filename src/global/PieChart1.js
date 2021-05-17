@@ -26,10 +26,10 @@ const PieChart1 = ({ totalGuests}) => {
           { title: 'Vãng Lai', value: guests4.length, color: '#6A2457' },
         ]}
       />
-      <span style={{ background: "#E38627" }}>{`${guests1.length / totalGuests * 100}%`} Đ.Biệt</span>
-      <span style={{ background: "#C13C37" }}>{`${guests2.length / totalGuests * 100}%`} VIP</span>
-      <span style={{ background: "#6A2135" }}>{`${guests3.length / totalGuests * 100}%`} T.Năng</span>
-      <span style={{ background: "#6A2457" }}>{`${guests4.length / totalGuests * 100}%`} V.Lai</span>
+      <span style={{ background: "#E38627" }}>{`${Math.floor(guests1.length / totalGuests * 100)}%`} Đ.Biệt</span>
+      <span style={{ background: "#C13C37" }}>{`${Math.floor(guests2.length / totalGuests * 100)}%`} VIP</span>
+      <span style={{ background: "#6A2135" }}>{`${Math.floor(guests3.length / totalGuests * 100)}%`} T.Năng</span>
+      <span style={{ background: "#6A2457" }}>{`${Math.floor(guests4.length / totalGuests * 100)}%`} V.Lai</span>
     </>
   )
 }
