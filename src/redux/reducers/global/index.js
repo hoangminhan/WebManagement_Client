@@ -319,16 +319,8 @@ const globalReducer = (state = initialState, action) => {
 
     case "AUTHENTICATION": {
       const { login, user } = action.payload;
-      const {
-        fullName,
-        address,
-        _id,
-        image,
-        role,
-        email,
-        username,
-        phone,
-      } = user;
+      const { fullName, address, _id, image, role, email, username, phone } =
+        user;
       return {
         ...state,
         login: login,

@@ -166,32 +166,35 @@ export const getAllUsersAsync = (query, loading) => {
 };
 
 export const removeUsersAsync = (_id, image) => {
-  return (dispatch) => {
-    dispatch(toggleLoading(true));
+  const result = window.confirm("Bạn có muốn xoá không");
 
-    API.deleteUser(_id, image)
-      .then((res) => {
-        if (res.data && res.data.status) {
-          dispatch(removeUser(_id));
-        } else {
-          triggerNotif({
-            type: "ERROR",
-            content: res.data.message,
-          });
-        }
-      })
-      .catch((err) => {
-        dispatch(
-          triggerNotif({
-            type: "ERROR",
-            content: "SERVER_ERROR!",
-          })
-        );
-      })
-      .then(() => {
-        dispatch(toggleLoading(false));
-        dispatch(getAllUsersAsync({}));
-      });
+  return (dispatch) => {
+    if (result) {
+      dispatch(toggleLoading(true));
+      API.deleteUser(_id, image)
+        .then((res) => {
+          if (res.data && res.data.status) {
+            dispatch(removeUser(_id));
+          } else {
+            triggerNotif({
+              type: "ERROR",
+              content: res.data.message,
+            });
+          }
+        })
+        .catch((err) => {
+          dispatch(
+            triggerNotif({
+              type: "ERROR",
+              content: "SERVER_ERROR!",
+            })
+          );
+        })
+        .then(() => {
+          dispatch(toggleLoading(false));
+          dispatch(getAllUsersAsync({}));
+        });
+    }
   };
 };
 
@@ -203,28 +206,30 @@ export const removeUser = (payload) => {
 };
 
 export const removeGuestAsync = (_id) => {
+  const result = window.confirm("Bạn có muốn xoá không");
   return (dispatch) => {
-    API.deleteGuest(_id)
-      .then((res) => {
-        if (res.data && res.data.status) {
-          dispatch(removeGuest(_id));
-          alert('Xóa thành công!')
-        } else {
-          alert('Lỗi xóa: ' + res.data.message)
-        }
-      })
-      .catch((err) => {
-        dispatch(
-          triggerNotif({
-            type: "ERROR",
-            content: "SERVER_ERROR!",
-          })
-        );
-      })
-      .then(() => {
-        dispatch(toggleLoading(false));
-        dispatch(getAllGuestsAsync({}));
-      });
+    if (result) {
+      API.deleteGuest(_id)
+        .then((res) => {
+          if (res.data && res.data.status) {
+            dispatch(removeGuest(_id));
+          } else {
+            alert("Lỗi xóa: " + res.data.message);
+          }
+        })
+        .catch((err) => {
+          dispatch(
+            triggerNotif({
+              type: "ERROR",
+              content: "SERVER_ERROR!",
+            })
+          );
+        })
+        .then(() => {
+          dispatch(toggleLoading(false));
+          dispatch(getAllGuestsAsync({}));
+        });
+    }
   };
 };
 
@@ -284,28 +289,32 @@ export const removeProduct = (payload) => {
 };
 
 export const removeProductAsync = (_id) => {
+  const result = window.confirm("Bạn có muốn xoá không");
+
   return (dispatch) => {
-    API.removeProduct(_id)
-      .then((res) => {
-        if (res.data && res.data.status) {
-          dispatch(removeProduct(_id));
-          alert('Xóa thành công!')
-        } else {
-          alert('Lỗi xóa: ' + res.data.message)
-        }
-      })
-      .catch((err) => {
-        dispatch(
-          triggerNotif({
-            type: "ERROR",
-            content: "SERVER_ERROR!",
-          })
-        );
-      })
-      .then(() => {
-        dispatch(toggleLoading(false));
-        dispatch(getAllProductsAsync({}));
-      });
+    if (result) {
+      API.removeProduct(_id)
+        .then((res) => {
+          if (res.data && res.data.status) {
+            dispatch(removeProduct(_id));
+            // alert('Xóa thành công!')
+          } else {
+            alert("Lỗi xóa: " + res.data.message);
+          }
+        })
+        .catch((err) => {
+          dispatch(
+            triggerNotif({
+              type: "ERROR",
+              content: "SERVER_ERROR!",
+            })
+          );
+        })
+        .then(() => {
+          dispatch(toggleLoading(false));
+          dispatch(getAllProductsAsync({}));
+        });
+    }
   };
 };
 
