@@ -181,15 +181,14 @@ const Update = ({ updateForm, setUpdateForm }) => {
     updateUser(info._id, data)
       .then(res => {
         if (res.data && res.data.status) {
+          setUpdateForm({ status: false, info: {} })
+          alert(res.data.message)
           dispatch({
             type: 'UPDATE_USER',
             payload: res.data.newStaff
           })
         } else {
-          // dispatch(triggerNotif({
-          //   type: 'ERROR',
-          //   content: res.data.message
-          // }))
+         alert('Error: ' + res.data.message)
         }
       })
       .catch(err => {
@@ -201,7 +200,6 @@ const Update = ({ updateForm, setUpdateForm }) => {
       .then(() => {
         dispatch(toggleLoading(false))
         setFile(null)
-        setUpdateForm({ status: false, info: {} })
       })
   }
 

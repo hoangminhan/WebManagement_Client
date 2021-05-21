@@ -44,8 +44,8 @@ const Create = ({ status, setCreateForm }) => {
     createProduct(data)
       .then(res => {
         if (res.data && res.data.status) {
+          alert(res.data.message)
           setCreateForm(false)
-
           dispatch({
             type: 'CREATE_PRODUCT',
             payload: {
@@ -54,18 +54,11 @@ const Create = ({ status, setCreateForm }) => {
             }
           })
         } else {
-          // dispatch(triggerNotif({
-          //   type: 'ERROR',
-          //   content: res.data.message
-          // }))
-          alert('Sản phẩm đã tồn tại')
+          alert(res.data.message)
         }
       })
       .catch(err => {
-        // dispatch(triggerNotif({
-        //   type: 'ERROR',
-        //   content: 'SERVER_ERROR!'
-        // }))
+        alert(err)
       })
       .then(() => {
         dispatch(toggleLoading(false))

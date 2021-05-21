@@ -9,7 +9,7 @@ const Update = ({ updateForm, setUpdateForm }) => {
   const history = useHistory()
 
   const dispatch = useDispatch()
-  const login = useSelector(state => state.global.login)
+  const products = useSelector(state => state.global.products)
   const categories = useSelector(state => state.global.categories)
   const { info } = updateForm
 
@@ -24,6 +24,17 @@ const Update = ({ updateForm, setUpdateForm }) => {
     const price = priceEl.current.value.trim()
     const category = categoryEl.current.value !== 'Thể loại' && JSON.parse(categoryEl.current.value) || null
     const text = toChar(name)
+
+    let checkUsername = false
+
+    products.forEach(item => {
+      if (item.name == name && item.name !== info.name) {
+        checkUsername = true
+      }
+    })
+
+    if (checkUsername) return alert("Sản phẩm đã tồn tại")
+
     const data = {
       name, category, price, text
     }
@@ -32,26 +43,21 @@ const Update = ({ updateForm, setUpdateForm }) => {
     updateProduct(info._id, data)
       .then(res => {
         if (res.data && res.data.status) {
+          alert(res.data.message)
+          setUpdateForm({ status: false, updateForm: {} })
           dispatch({
             type: 'UPDATE_PRODUCT',
             payload: { ...res.data.newProduct, ...data }
           })
         } else {
-          // dispatch(triggerNotif({
-          //   type: 'ERROR',
-          //   content: res.data.message
-          // }))
+          alert(res.data.message)
         }
       })
       .catch(err => {
-        // dispatch(triggerNotif({
-        //   type: 'ERROR',
-        //   content: 'SERVER_ERROR!'
-        // }))
+        alert(err)
       })
       .then(() => {
         dispatch(toggleLoading(false))
-        setUpdateForm({ status: false, updateForm: {} })
       })
   }
 

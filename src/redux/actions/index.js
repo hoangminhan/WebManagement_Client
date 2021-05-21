@@ -174,21 +174,14 @@ export const removeUsersAsync = (_id, image) => {
       API.deleteUser(_id, image)
         .then((res) => {
           if (res.data && res.data.status) {
+            alert(res.data.message)
             dispatch(removeUser(_id));
           } else {
-            triggerNotif({
-              type: "ERROR",
-              content: res.data.message,
-            });
+            alert(res.data.message)
           }
         })
         .catch((err) => {
-          dispatch(
-            triggerNotif({
-              type: "ERROR",
-              content: "SERVER_ERROR!",
-            })
-          );
+          alert(err)
         })
         .then(() => {
           dispatch(toggleLoading(false));
@@ -212,18 +205,14 @@ export const removeGuestAsync = (_id) => {
       API.deleteGuest(_id)
         .then((res) => {
           if (res.data && res.data.status) {
+            alert(res.data.message);
             dispatch(removeGuest(_id));
           } else {
-            alert("Lỗi xóa: " + res.data.message);
+            alert(res.data.message);
           }
         })
         .catch((err) => {
-          dispatch(
-            triggerNotif({
-              type: "ERROR",
-              content: "SERVER_ERROR!",
-            })
-          );
+          alert(err)
         })
         .then(() => {
           dispatch(toggleLoading(false));
@@ -297,18 +286,13 @@ export const removeProductAsync = (_id) => {
         .then((res) => {
           if (res.data && res.data.status) {
             dispatch(removeProduct(_id));
-            // alert('Xóa thành công!')
+            alert(res.data.message)
           } else {
-            alert("Lỗi xóa: " + res.data.message);
+            alert(res.data.message)
           }
         })
         .catch((err) => {
-          dispatch(
-            triggerNotif({
-              type: "ERROR",
-              content: "SERVER_ERROR!",
-            })
-          );
+          alert(err)
         })
         .then(() => {
           dispatch(toggleLoading(false));

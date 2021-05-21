@@ -186,26 +186,19 @@ const Create = ({ createForm, setCreateForm }) => {
     dispatch(toggleLoading(true));
     createUser(data)
       .then((res) => {
-        setCreateForm(false);
-
         if (res.data && res.data.status) {
+          setCreateForm(false);
+          alert(res.data.message)
           dispatch({
             type: "CREATE_USER",
             payload: res.data.staff,
           });
         } else {
           alert(res.data.message);
-          // dispatch(triggerNotif({
-          //   type: 'ERROR',
-          //   content: res.data.message
-          // }))
         }
       })
       .catch((err) => {
-        // dispatch(triggerNotif({
-        //   type: 'ERROR',
-        //   content: 'SERVER_ERROR!'
-        // }))
+        alert('Error: ' + err)
       })
       .then(() => {
         dispatch(toggleLoading(false));

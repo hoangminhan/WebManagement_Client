@@ -117,6 +117,7 @@ const Create = ({ status, setCreateForm }) => {
       .then((res) => {
         if (res.data && res.data.status) {
           setCreateForm(false);
+          alert(res.data.message);
           dispatch({
             type: "CREATE_GUEST",
             payload: res.data.newGuest,
