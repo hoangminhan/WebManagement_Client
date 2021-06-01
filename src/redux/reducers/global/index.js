@@ -27,11 +27,11 @@ const initialState = {
       path: "/products",
       icon: <i className="fas fa-shopping-bag"></i>,
     },
-    {
-      title: "Thông tin",
-      path: "/about",
-      icon: <i className="fas fa-info"></i>,
-    },
+    // {
+    //   title: "Thông tin",
+    //   path: "/about",
+    //   icon: <i className="fas fa-info"></i>,
+    // },
   ],
   countries: [
     {
